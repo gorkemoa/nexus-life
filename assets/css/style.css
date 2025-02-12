@@ -1,0 +1,232 @@
+/* Tema Renkleri */
+:root {
+    --white: #ffffff;
+    --dark-gray: #1d1d1f;
+    --light-beige: #3c3b39;
+    --light-gray: #4a4a4a;
+    --medium-gray: #454543;
+}
+
+/* Temel Stiller */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--dark-gray);
+    background: #ffffff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+section {
+    padding: 5rem 0;
+    position: relative;
+    z-index: 1;
+}
+
+/* Tipografi */
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    color: var(--dark-gray);
+    font-weight: 500;
+}
+
+h1 {
+    font-size: 3.5rem;
+    letter-spacing: -0.02em;
+}
+
+h2 {
+    font-size: 2.5rem;
+    letter-spacing: -0.01em;
+}
+
+h3 {
+    font-size: 2rem;
+    color: var(--dark-gray);
+}
+
+p {
+    margin-bottom: 1rem;
+    color: var(--light-gray);
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Metin Renkleri */
+.text-white {
+    color: var(--white) !important;
+}
+
+.text-light-beige {
+    color: var(--light-beige) !important;
+}
+
+.text-light-gray {
+    color: var(--light-gray) !important;
+}
+
+/* Butonlar */
+.btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background-color: var(--dark-gray);
+    color: var(--white);
+    border: 1px solid var(--dark-gray);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--dark-gray);
+}
+
+/* Özel Sınıflar */
+.luxury-text {
+    background: linear-gradient(to right, var(--dark-gray), var(--light-gray));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.glass-effect {
+    background: #ffffff;
+    border: none;
+    box-shadow: none;
+}
+
+/* Yükleme Göstergesi */
+.loading-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.3s ease;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #27AE60;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.loading-text {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+/* Animasyonlar */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Medya Sorguları */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-size: 1.75rem;
+    }
+
+    section {
+        padding: 3rem 0;
+    }
+
+    .btn {
+        padding: 0.8rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+}
+
+/* Özel Efektler */
+.text-gradient {
+    background: linear-gradient(to right, var(--light-beige), #d4af37);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hover-lift {
+    transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+}
+
+.glass-card {
+    background: #ffffff;
+    backdrop-filter: none;
+    border: none;
+    border-radius: 15px;
+}
+
+/* Global Styles */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Playfair Display', serif;
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden;
+}

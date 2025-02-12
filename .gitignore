@@ -1,0 +1,27 @@
+# Sistem dosyaları
+.DS_Store
+Thumbs.db
+
+# IDE ve editör dosyaları
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Bağımlılık dizinleri
+node_modules/
+vendor/
+
+# Derleme çıktıları
+dist/
+build/
+*.log
+
+# Ortam değişkenleri
+.env
+.env.local
+.env.*.local
+
+# Cache dosyaları
+.cache/
+*.cache 

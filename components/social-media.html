@@ -1,0 +1,484 @@
+<!-- Sosyal Medya ve Instagram Entegrasyonu -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<section class="social-media-section py-5">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h2 class="display-4 fw-bold">Sosyal Medyada Biz</h2>
+            <p class="text-muted">Bizi sosyal medyada takip ederek en güncel gelişmelerden haberdar olun</p>
+        </div>
+
+        <!-- Instagram Stories -->
+        <div class="instagram-stories mb-5">
+            <div class="stories-wrapper">
+                <div class="stories-container d-flex justify-content-center overflow-auto py-3">
+                    <div class="story-item mx-3" data-bs-toggle="modal" data-bs-target="#storyModal1">
+                        <div class="story-ring">
+                            <div class="story-circle">
+                                <img src="https://images.unsplash.com/photo-1664575198308-3959904fa430?q=80&w=2940&auto=format&fit=crop" alt="Üretim Hikayesi">
+                            </div>
+                        </div>
+                        <span class="story-title mt-2">Üretim</span>
+                    </div>
+                    <div class="story-item mx-3" data-bs-toggle="modal" data-bs-target="#storyModal2">
+                        <div class="story-ring">
+                            <div class="story-circle">
+                                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2900&auto=format&fit=crop" alt="Tasarım Hikayesi">
+                            </div>
+                        </div>
+                        <span class="story-title mt-2">Tasarım</span>
+                    </div>
+                    <div class="story-item mx-3" data-bs-toggle="modal" data-bs-target="#storyModal3">
+                        <div class="story-ring">
+                            <div class="story-circle">
+                                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=2832&auto=format&fit=crop" alt="Kampanya">
+                            </div>
+                        </div>
+                        <span class="story-title mt-2">Kampanya</span>
+                    </div>
+                    <div class="story-item mx-3" data-bs-toggle="modal" data-bs-target="#storyModal4">
+                        <div class="story-ring">
+                            <div class="story-circle">
+                                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2900&auto=format&fit=crop" alt="Koleksiyon">
+                            </div>
+                        </div>
+                        <span class="story-title mt-2">Koleksiyon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Story Modals -->
+        <div class="modal fade" id="storyModal1" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-body p-0">
+                        <div class="story-modal-content">
+                            <div class="story-header">
+                                <div class="d-flex align-items-center p-3">
+                                    <img src="https://images.unsplash.com/photo-1664575198308-3959904fa430?q=80&w=2940&auto=format&fit=crop" alt="Profile" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
+                                    <div class="ms-3">
+                                        <h6 class="mb-0">@nexuslife</h6>
+                                        <small class="text-muted">2 saat önce</small>
+                                    </div>
+                                </div>
+                                <div class="story-progress">
+                                    <div class="progress-bar"></div>
+                                </div>
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1664575198308-3959904fa430?q=80&w=2940&auto=format&fit=crop" class="w-100" alt="Story">
+                            <div class="story-footer p-3">
+                                <h5>Yeni Üretim Sürecimiz</h5>
+                                <p>%100 el yapımı üretim sürecimizi keşfedin!</p>
+                                <a href="#" class="btn btn-primary">Daha Fazla Bilgi</a>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instagram Feed -->
+        <div class="instagram-feed mb-5">
+            <div class="feed-header d-flex align-items-center justify-content-between mb-4">
+                <div class="profile-info d-flex align-items-center">
+                    <img src="https://images.unsplash.com/photo-1664575198308-3959904fa430?q=80&w=2940&auto=format&fit=crop" alt="Profil" class="profile-pic rounded-circle me-3" style="width: 50px; height: 50px;">
+                    <div>
+                        <h5 class="mb-0 fw-bold">@nexuslife</h5>
+                        <small class="text-muted">12.5K Takipçi</small>
+                    </div>
+                </div>
+                <a href="https://instagram.com" target="_blank" class="btn btn-primary">Takip Et</a>
+            </div>
+            
+            <div class="row g-3" id="instafeed">
+                <div class="col-lg-4 col-md-6">
+                    <div class="insta-post card h-100">
+                        <div class="card-img-top position-relative">
+                            <img src="https://images.unsplash.com/photo-1587061949409-02df41d5e562?q=80&w=2940&auto=format&fit=crop" alt="Tiny House 1" class="w-100">
+                            <div class="hover-overlay">
+                                <div class="d-flex justify-content-center align-items-center h-100">
+                                    <span class="me-3"><i class="fa-solid fa-heart"></i> 1.2K</span>
+                                    <span><i class="fa-solid fa-comment"></i> 48</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="insta-post card h-100">
+                        <div class="card-img-top position-relative">
+                            <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?q=80&w=2940&auto=format&fit=crop" alt="Tiny House 2" class="w-100">
+                            <div class="hover-overlay">
+                                <div class="d-flex justify-content-center align-items-center h-100">
+                                    <span class="me-3"><i class="fa-solid fa-heart"></i> 983</span>
+                                    <span><i class="fa-solid fa-comment"></i> 32</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="insta-post card h-100">
+                        <div class="card-img-top position-relative">
+                            <img src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?q=80&w=2940&auto=format&fit=crop" alt="Tiny House 3" class="w-100">
+                            <div class="hover-overlay">
+                                <div class="d-flex justify-content-center align-items-center h-100">
+                                    <span class="me-3"><i class="fa-solid fa-heart"></i> 1.5K</span>
+                                    <span><i class="fa-solid fa-comment"></i> 56</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sosyal Medya Bağlantıları -->
+        
+    </div>
+</section>
+
+<style>
+.social-media-section {
+    background-color: #f8f9fa;
+}
+
+.social-media-section h2 {
+    color: #3c3b39;
+    font-size: 2.4rem;
+    font-weight: 900;
+    margin-bottom: 4rem;
+    position: relative;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.social-media-section h2:after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: #E67E22;
+    border-radius: 0;
+}
+
+.social-media-section p {
+    color: #3c3b39;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.story-title {
+    font-size: 0.9rem;
+    color: #3c3b39;
+    font-weight: 600;
+    display: block;
+    text-align: center;
+}
+
+.profile-info h5 {
+    color: #3c3b39;
+    font-weight: 900;
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+}
+
+.profile-info small {
+    color: #3c3b39;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.story-header h6 {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.story-header small {
+    font-weight: 500;
+}
+
+.story-footer h5 {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.story-footer p {
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.story-ring {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    padding: 3px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.story-ring:hover {
+    transform: scale(1.05);
+}
+
+.story-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    background: white;
+    padding: 2px;
+    aspect-ratio: 1;
+}
+
+.story-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    aspect-ratio: 1;
+}
+
+.stories-container {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.stories-container::-webkit-scrollbar {
+    display: none;
+}
+
+.insta-post {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.insta-post:hover {
+    transform: translateY(-5px);
+}
+
+.insta-post .card-img-top {
+    position: relative;
+    padding-bottom: 100%; /* 1:1 aspect ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.insta-post .card-img-top img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hover-overlay span {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.hover-overlay i {
+    margin-right: 5px;
+}
+
+.insta-post:hover .hover-overlay {
+    opacity: 1;
+}
+
+.social-link {
+    text-decoration: none;
+    color: #666;
+    transition: all 0.3s ease;
+    padding: 15px 25px;
+    border-radius: 10px;
+}
+
+.social-link:hover {
+    transform: translateY(-5px);
+}
+
+.social-link.instagram:hover {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+}
+
+.social-link.facebook:hover {
+    background: #3b5998;
+    color: white;
+}
+
+.social-link.twitter:hover {
+    background: #1DA1F2;
+    color: white;
+}
+
+.social-link.youtube:hover {
+    background: #FF0000;
+    color: white;
+}
+
+.profile-info {
+    background: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Story Modal Styles */
+.story-modal-content {
+    position: relative;
+    background: #000;
+}
+
+.story-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+    color: white;
+}
+
+.story-progress {
+    height: 3px;
+    background: rgba(255,255,255,0.3);
+    margin: 0 10px;
+}
+
+.story-progress .progress-bar {
+    height: 100%;
+    background: white;
+    width: 0;
+    animation: progress 5s linear;
+}
+
+.story-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+}
+
+@keyframes progress {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+.modal-dialog {
+    max-width: 400px;
+    margin: 0.5rem auto;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+}
+
+.modal-content {
+    height: auto;
+    max-height: 90vh;
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.modal-body {
+    padding: 0;
+    position: relative;
+    height: 100%;
+}
+
+.modal-body img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.btn-close {
+    background-color: white;
+    opacity: 1;
+    z-index: 2;
+}
+</style>
+
+<!-- Bootstrap JS ve Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Story modalları için otomatik ilerleme ve kapatma
+    const storyModals = document.querySelectorAll('.modal');
+    let storyTimeout;
+    let progressTimeout;
+    
+    storyModals.forEach(modal => {
+        const modalInstance = new bootstrap.Modal(modal);
+        
+        modal.addEventListener('shown.bs.modal', function() {
+            const progressBar = this.querySelector('.progress-bar');
+            progressBar.style.width = '0';
+            
+            // Progress bar animasyonunu başlat
+            progressTimeout = setTimeout(() => {
+                progressBar.style.width = '100%';
+            }, 100);
+
+            // 5 saniye sonra modalı kapat
+            storyTimeout = setTimeout(() => {
+                modalInstance.hide();
+            }, 5000);
+        });
+
+        // Modal kapatıldığında timeout'ları temizle
+        modal.addEventListener('hidden.bs.modal', function() {
+            clearTimeout(storyTimeout);
+            clearTimeout(progressTimeout);
+            const progressBar = this.querySelector('.progress-bar');
+            progressBar.style.width = '0';
+        });
+
+        // Kapatma butonuna tıklandığında
+        const closeBtn = modal.querySelector('.btn-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                clearTimeout(storyTimeout);
+                clearTimeout(progressTimeout);
+                modalInstance.hide();
+            });
+        }
+    });
+});
+</script> 

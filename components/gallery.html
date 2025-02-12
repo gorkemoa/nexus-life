@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri - NexusLife</title>
+    <link rel="stylesheet" href="../assets/css/gallery.css">
+</head>
+<body>
+    <section class="gallery-section">
+        <div class="container">
+            <div class="gallery-container">
+                <h1 class="gallery-title">Modern Yaşam Alanları</h1>
+                <p class="gallery-subtitle">Doğal ve modern tasarımlarımızı keşfedin</p>
+                <div class="gallery-grid">
+                    <!-- Ana Büyük Görsel -->
+                    <div class="gallery-item">
+                        <div class="img-container">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Modern Villa" loading="lazy">
+                            <div class="item-overlay">
+                                <h3 class="item-title">Lüks Villa</h3>
+                                <p class="item-description">Modern mimari ve konfor bir arada</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Üst Sağ Küçük Görsel 1 -->
+                    <div class="gallery-item">
+                        <div class="img-container">
+                            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c" alt="İç Mekan" loading="lazy">
+                            <div class="item-overlay">
+                                <h3 class="item-title">Modern İç Mekan</h3>
+                                <p class="item-description">Ferah ve aydınlık tasarım</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Üst Sağ Küçük Görsel 2 -->
+                    <div class="gallery-item">
+                        <div class="img-container">
+                            <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3" alt="Bahçe" loading="lazy">
+                            <div class="item-overlay">
+                                <h3 class="item-title">Yeşil Yaşam</h3>
+                                <p class="item-description">Doğayla iç içe</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Orta Sağ Geniş Görsel -->
+                    <div class="gallery-item">
+                        <div class="img-container">
+                            <img src="https://images.pexels.com/photos/27195983/pexels-photo-27195983/free-photo-of-tatil-su-mimari-seyahat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Havuz" loading="lazy">
+                            <div class="item-overlay">
+                                <h3 class="item-title">Havuzlu Villa</h3>
+                                <p class="item-description">Lüks yaşamın simgesi</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alt Sol Küçük Görsel 1 -->
+                    <div class="gallery-item">
+                        <div class="img-container">
+                            <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d" alt="Mutfak" loading="lazy">
+                            <div class="item-overlay">
+                                <h3 class="item-title">Modern Mutfak</h3>
+                                <p class="item-description">Fonksiyonel ve şık</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alt Sol Küçük Görsel 2 -->
+                    <div class="gallery-item">
+                        <div class="img-container">
+                            <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde" alt="Banyo" loading="lazy">
+                            <div class="item-overlay">
+                                <h3 class="item-title">Lüks Banyo</h3>
+                                <p class="item-description">Spa keyfi evinizde</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alt Sağ Büyük Görsel -->
+                    <div class="gallery-item">
+                        <div class="img-container">
+                            <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d" alt="Yatak Odası" loading="lazy">
+                            <div class="item-overlay">
+                                <h3 class="item-title">Yatak Odası</h3>
+                                <p class="item-description">Huzurlu bir uyku için</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alt Sol Geniş Görsel -->
+                    <div class="gallery-item">
+                        <div class="img-container">
+                            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9" alt="Dış Cephe" loading="lazy">
+                            <div class="item-overlay">
+                                <h3 class="item-title">Modern Mimari</h3>
+                                <p class="item-description">Etkileyici dış cephe tasarımı</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lightbox Modal -->
+            <div id="lightbox" class="lightbox">
+                <div class="lightbox-content">
+                    <span class="close-btn">&times;</span>
+                    <div class="lightbox-image-container">
+                        <img id="lightbox-img" src="" alt="Büyük Görüntü">
+                    </div>
+                    <div class="lightbox-details">
+                        <h3></h3>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        (function() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxTitle = lightbox.querySelector('.lightbox-details h3');
+            const lightboxDesc = lightbox.querySelector('.lightbox-details p');
+            const closeBtn = document.querySelector('.close-btn');
+
+            galleryItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const img = item.querySelector('img');
+                    const title = item.querySelector('.item-title');
+                    const desc = item.querySelector('.item-description');
+
+                    lightboxImg.src = img.src;
+                    lightboxTitle.textContent = title.textContent;
+                    lightboxDesc.textContent = desc.textContent;
+
+                    lightbox.style.display = 'block';
+                    requestAnimationFrame(() => {
+                        lightbox.classList.add('show');
+                    });
+                });
+            });
+
+            function closeLightbox() {
+                lightbox.classList.remove('show');
+                setTimeout(() => {
+                    lightbox.style.display = 'none';
+                }, 300);
+            }
+
+            closeBtn.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeLightbox();
+            });
+        })();
+    </script>
+</body>
+</html> 

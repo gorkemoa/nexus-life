@@ -1,0 +1,110 @@
+.production-process h2 {
+    color: #1E2837;
+    font-weight: 900;
+    font-size: 3.5rem;
+    margin-bottom: 60px;
+    text-align: center;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    line-height: 1.4;
+}
+
+.production-process h2:after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: #E67E22;
+    border-radius: 0;
+}
+
+.production-process .production-title {
+    color: #1E2837;
+    font-weight: 900;
+    font-size: 3.5rem;
+    margin-bottom: 60px;
+    text-align: center;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    line-height: 1.4;
+}
+
+.production-process .production-title:after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: #E67E22;
+    border-radius: 0;
+}
+
+.step-info h3 {
+    color: #1E2837;
+    font-weight: 900;
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    line-height: 1.4;
+}
+
+.step-info .lead {
+    color: #666;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+.feature-item h5 {
+    color: #2C3E50;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+.feature-item p {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.quality-guarantee h3 {
+    color: #1E2837;
+    font-weight: 900;
+    font-size: 2.8rem;
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    line-height: 1.4;
+}
+
+.quality-guarantee h3:after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: #E67E22;
+    border-radius: 0;
+}
+
+.badge-item span {
+    color: #2C3E50;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+} 
