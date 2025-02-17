@@ -1,68 +1,1068 @@
 <!DOCTYPE html>
-<header class="header">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <div class="header-container">
-        <a href="/" class="logo-link">
-            <img src="/assets/images/logopng.png" alt="Nexus Life" class="logo-image">
-        </a>
-        <nav class="nav-menu">
-            <ul class="nav-list">
-                <li class="nav-item">
-                    <a href="/" class="nav-link">Ana Sayfa</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <button class="nav-link dropdown-toggle">
-                        Kurumsal <i class="fas fa-chevron-down"></i>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            z-index: 50;
+        }
+        .group:hover .dropdown-menu {
+            display: block;
+        }
+        .dropdown-item {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #4a5568;
+            transition: all 0.2s;
+        }
+        .dropdown-item:hover {
+            background: linear-gradient(to right, rgba(196, 164, 124, 0.1), rgba(226, 177, 60, 0.1));
+            color: #c4a47c;
+        }
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+        .mobile-menu.active {
+            display: block;
+        }
+        .mobile-accordion-content {
+            display: none;
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+        .mobile-accordion-content.active {
+            display: block;
+        }
+        /* Header yüksekliğini telafi etmek için */
+        .header-offset {
+            height: 80px;
+        }
+        /* Dropdown ok animasyonu */
+        .dropdown-arrow {
+            transition: transform 0.2s ease-in-out;
+        }
+        .group:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+        /* Aktif menü öğesi için alt çizgi */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #2563eb;
+            transform: scaleX(0);
+            transition: transform 0.2s ease-in-out;
+            transform-origin: center;
+        }
+        .nav-link:hover::after {
+            transform: scaleX(1);
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--neutral-100);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: var(--z-fixed);
+        }
+
+        .header__container {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header__logo {
+            font-size: 2rem;
+            font-weight: var(--font-bold);
+            color: var(--primary-color);
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .header__logo:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Navigation */
+        .nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav__list {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav__link {
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            color: var(--neutral-700);
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav__link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav__link:hover::after,
+        .nav__link.active::after {
+            transform: scaleX(1);
+        }
+
+        .nav__link:hover,
+        .nav__link.active {
+            color: var(--secondary-color);
+        }
+
+        /* Dropdown */
+        .nav__item-dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 200px;
+            background-color: var(--neutral-100);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .nav__item-dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 0.8rem 1.2rem;
+            font-size: var(--text-sm);
+            color: var(--neutral-700);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--neutral-200);
+            color: var(--secondary-color);
+        }
+
+        /* Mobil Menü Butonu */
+        .mobile-menu-button {
+            display: none;
+            padding: 0.5rem;
+            color: var(--neutral-700);
+            cursor: pointer;
+        }
+
+        @media (max-width: 1024px) {
+            .nav {
+                display: none;
+            }
+            
+            .mobile-menu-button {
+                display: block;
+            }
+            
+            .nav.active {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--neutral-100);
+                padding: 1rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav__list {
+                flex-direction: column;
+                width: 100%;
+                gap: 0;
+            }
+            
+            .nav__link {
+                display: block;
+                padding: 1rem;
+                width: 100%;
+                text-align: left;
+                border-bottom: 1px solid var(--neutral-200);
+            }
+            
+            .dropdown-content {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                padding-left: 1rem;
+                background-color: var(--neutral-200);
+                margin: 0.5rem 0;
+            }
+            
+            .dropdown-content a {
+                padding: 0.8rem 1rem;
+                border-bottom: 1px solid var(--neutral-300);
+            }
+            
+            .dropdown-content a:last-child {
+                border-bottom: none;
+            }
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(196, 164, 124, 0.1);
+        }
+
+        .nav-link {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, #c4a47c, #e2b13c);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: right;
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .dropdown-menu {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(196, 164, 124, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-item:hover {
+            background: linear-gradient(to right, rgba(196, 164, 124, 0.1), rgba(226, 177, 60, 0.1));
+        }
+
+        .mobile-menu {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+        }
+
+        .mega-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(196, 164, 124, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            z-index: 50;
+            width: max-content;
+            min-width: 300px;
+            max-width: 800px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .group:hover .mega-menu {
+            display: grid;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mega-menu.products-menu {
+            min-width: 700px;
+            max-width: 800px;
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(196, 164, 124, 0.1);
+            transform: translateY(10px);
+            left: -200px;
+        }
+
+        .group:hover .mega-menu.products-menu {
+            transform: translateY(0);
+        }
+
+        .product-card {
+            position: relative;
+            width: 100%;
+            height: 160px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            background: #ffffff;
+            border: 1px solid rgba(196, 164, 124, 0.1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-image-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.15);
+        }
+
+        .product-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-top: 1px solid rgba(196, 164, 124, 0.1);
+        }
+
+        .product-title-top {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #4a5568;
+            margin-bottom: 0.25rem;
+            letter-spacing: 0.5px;
+        }
+
+        .product-description {
+            font-size: 0.75rem;
+            color: #718096;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .product-link {
+            display: inline-block;
+            font-size: 0.75rem;
+            color: #c4a47c;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        .product-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: #c4a47c;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .product-link:hover::after {
+            transform: scaleX(1);
+        }
+
+        .mega-menu.blog-menu {
+            min-width: 800px;
+            max-width: 1000px;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(196, 164, 124, 0.1);
+            transform: translateY(10px);
+            right: -200px;
+            left: auto;
+        }
+
+        .group:hover .mega-menu.blog-menu {
+            transform: translateY(0);
+        }
+
+        .blog-section {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .blog-section:hover {
+            background: linear-gradient(to right, rgba(196, 164, 124, 0.05), rgba(226, 177, 60, 0.05));
+            transform: translateY(-2px);
+        }
+
+        .blog-section-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #c4a47c;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(196, 164, 124, 0.1);
+        }
+
+        .blog-item {
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0.4rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .blog-item:hover {
+            background: linear-gradient(to right, rgba(196, 164, 124, 0.1), rgba(226, 177, 60, 0.1));
+            transform: translateX(5px);
+        }
+
+        .blog-item-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-item-title {
+            font-size: 1rem;
+            color: #4a5568;
+            font-weight: 500;
+        }
+
+        .blog-item-description {
+            font-size: 0.85rem;
+            color: #718096;
+            line-height: 1.4;
+        }
+
+        .mega-menu.corporate-menu {
+            min-width: 800px;
+            max-width: 1000px;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(196, 164, 124, 0.1);
+            transform: translateY(10px) translateX(-50%);
+            left: 50%;
+            right: auto;
+        }
+
+        .group:hover .mega-menu.corporate-menu {
+            transform: translateY(0) translateX(-50%);
+        }
+
+        .menu-section {
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .menu-section:hover {
+            background: linear-gradient(to right, rgba(196, 164, 124, 0.05), rgba(226, 177, 60, 0.05));
+            transform: translateY(-2px);
+        }
+
+        .menu-section-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #c4a47c;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(196, 164, 124, 0.1);
+        }
+
+        .dropdown-item {
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0.4rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .dropdown-item:hover {
+            background: linear-gradient(to right, rgba(196, 164, 124, 0.1), rgba(226, 177, 60, 0.1));
+            transform: translateX(5px);
+        }
+
+        .menu-item-header {
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item-header .font-medium {
+            font-size: 1rem;
+            color: #4a5568;
+            font-weight: 500;
+        }
+
+        .menu-icon {
+            width: 1.2rem;
+            height: 1.2rem;
+            margin-right: 0.75rem;
+            color: #c4a47c;
+        }
+
+        .menu-description {
+            font-size: 0.85rem;
+            color: #718096;
+            line-height: 1.4;
+            margin-left: 2rem;
+        }
+
+        .menu-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .menu-section-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #4a5568;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.3rem;
+        }
+
+        .menu-description {
+            font-size: 0.8rem;
+            color: #718096;
+            line-height: 1.3;
+        }
+
+        @media (max-width: 1280px) {
+            .mega-menu.corporate-menu,
+            .mega-menu.products-menu,
+            .mega-menu.blog-menu {
+                left: 50%;
+                right: auto;
+                transform: translateX(-50%) translateY(10px);
+            }
+
+            .group:hover .mega-menu.corporate-menu,
+            .group:hover .mega-menu.products-menu,
+            .group:hover .mega-menu.blog-menu {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            .mega-menu.products-menu {
+                min-width: 600px;
+                max-width: 700px;
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .product-card {
+                height: 140px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .mega-menu.corporate-menu,
+            .mega-menu.products-menu,
+            .mega-menu.blog-menu {
+                min-width: 100%;
+                max-width: 100%;
+                left: 0;
+                right: auto;
+                transform: translateY(10px);
+                grid-template-columns: 1fr;
+            }
+
+            .group:hover .mega-menu.corporate-menu,
+            .group:hover .mega-menu.products-menu,
+            .group:hover .mega-menu.blog-menu {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<header class="header fixed w-full z-50 transition-all duration-300">
+    <div class="container mx-auto px-4 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+            <!-- Logo -->
+            <a href="/" class="flex items-center space-x-2">
+                <img src="/assets/images/logopng.png" alt="Nexus Life" class="h-12 w-auto">
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center space-x-8">
+                <a href="/" class="nav-link text-base text-gray-700 hover:text-[#c4a47c] transition-colors duration-300">
+                    Ana Sayfa
+                </a>
+
+                <!-- Kurumsal Dropdown -->
+                <div class="group relative">
+                    <button class="nav-link text-base text-black hover:text-[#c4a47c] transition-colors duration-300 flex items-center">
+                        <span>Kurumsal</span>
+                        <svg class="w-4 h-4 ml-1 transform transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+                        </svg>
                     </button>
-                    <div class="dropdown-menu">
-                        <a href="/kurumsal/hakkimizda" class="dropdown-item">
-                            <i class="fas fa-building"></i> Hakkımızda
+                    <div class="mega-menu corporate-menu">
+                        <div class="menu-section">
+                            <h3 class="menu-section-title text-black">Şirket Bilgileri</h3>
+                            <a href="/kurumsal/hakkimizda" class="dropdown-item">
+                                <div class="menu-item-header">
+                                    <i class="fas fa-building menu-icon"></i>
+                                    <div class="font-medium">Hakkımızda</div>
+                                </div>
+                                <p class="menu-description">20 yıllık deneyimimizle modern yaşam alanları tasarlıyoruz.</p>
+                            </a>
+                            <a href="/kurumsal/vizyon-misyon" class="dropdown-item">
+                                <div class="menu-item-header">
+                                    <i class="fas fa-bullseye menu-icon"></i>
+                                    <div class="font-medium">Vizyon & Misyon</div>
+                                </div>
+                                <p class="menu-description">Sürdürülebilir ve yenilikçi yaşam alanları oluşturma hedefimiz.</p>
+                            </a>
+                        </div>
+                        <div class="menu-section">
+                            <h3 class="menu-section-title text-black">Kalite ve Politikalar</h3>
+                            <a href="/kurumsal/kalite-politikamiz" class="dropdown-item">
+                                <div class="menu-item-header">
+                                    <i class="fas fa-award menu-icon"></i>
+                                    <div class="font-medium">Kalite Politikamız</div>
+                                </div>
+                                <p class="menu-description">En yüksek kalite standartlarında üretim ve hizmet.</p>
+                            </a>
+                            <a href="/kurumsal/cevre-politikasi" class="dropdown-item">
+                                <div class="menu-item-header">
+                                    <i class="fas fa-leaf menu-icon"></i>
+                                    <div class="font-medium">Çevre Politikası</div>
+                                </div>
+                                <p class="menu-description">Doğa dostu üretim ve sürdürülebilir çözümler.</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ürünler Dropdown -->
+                <div class="group relative">
+                    <button class="nav-link text-base text-gray-700 hover:text-[#c4a47c] transition-colors duration-300 flex items-center">
+                        <span>Ürünlerimiz</span>
+                        <svg class="w-4 h-4 ml-1 transform transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="mega-menu products-menu">
+                        <div class="product-card">
+                            <div class="product-image-wrapper">
+                                <img src="https://images.pexels.com/photos/2079234/pexels-photo-2079234.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Tiny House" class="product-image">
+                            </div>
+                            <div class="product-content">
+                                <h3 class="product-title-top">Tiny House</h3>
+                                <p class="product-description">Minimalist yaşam için tasarlanmış kompakt evler.</p>
+                                <a href="/urunler/tiny-house" class="product-link">Detaylı Bilgi</a>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image-wrapper">
+                                <img src="https://images.pexels.com/photos/1974596/pexels-photo-1974596.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Bungalow" class="product-image">
+                            </div>
+                            <div class="product-content">
+                                <h3 class="product-title-top">Bungalow</h3>
+                                <p class="product-description">Doğayla iç içe yaşam için modern bungalov evler.</p>
+                                <a href="/urunler/bungalow" class="product-link">Detaylı Bilgi</a>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image-wrapper">
+                                <img src="https://images.pexels.com/photos/3214064/pexels-photo-3214064.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Capsule House" class="product-image">
+                            </div>
+                            <div class="product-content">
+                                <h3 class="product-title-top">Capsule House</h3>
+                                <p class="product-description">Geleceğin yaşam alanları: Kapsül evler.</p>
+                                <a href="/urunler/capsule-house" class="product-link">Detaylı Bilgi</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="/galeri" class="nav-link text-base text-gray-700 hover:text-[#c4a47c] transition-colors duration-300">
+                    Galeri
+                </a>
+
+                <!-- Blog Dropdown -->
+                <div class="group relative">
+                    <button class="nav-link text-base text-gray-700 hover:text-[#c4a47c] transition-colors duration-300 flex items-center">
+                        <span>Blog</span>
+                        <svg class="w-4 h-4 ml-1 transform transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="mega-menu blog-menu">
+                        <div class="blog-section">
+                            <h3 class="blog-section-title text-black">Haberler</h3>
+                            <a href="/blog/haberler" class="blog-item">
+                                <div class="blog-item-header">
+                                    <i class="fas fa-newspaper menu-icon"></i>
+                                    <div class="blog-item-title">Son Haberler</div>
+                                </div>
+                                <p class="blog-item-description">Şirketimiz ve sektörden en güncel haberler.</p>
+                            </a>
+                            <a href="/blog/basin" class="blog-item">
+                                <div class="blog-item-header">
+                                    <i class="fas fa-tv menu-icon"></i>
+                                    <div class="blog-item-title">Basında Biz</div>
+                                </div>
+                                <p class="blog-item-description">Medyada yer alan haberler ve röportajlar.</p>
+                            </a>
+                        </div>
+                        <div class="blog-section">
+                            <h3 class="blog-section-title text-black">Multimedya</h3>
+                            <a href="/blog/videolar" class="blog-item">
+                                <div class="blog-item-header">
+                                    <i class="fas fa-video menu-icon"></i>
+                                    <div class="blog-item-title">Video Galeri</div>
+                                </div>
+                                <p class="blog-item-description">Ürünlerimiz ve projelerimizin video içerikleri.</p>
+                            </a>
+                            <a href="/blog/fotograflar" class="blog-item">
+                                <div class="blog-item-header">
+                                    <i class="fas fa-camera menu-icon"></i>
+                                    <div class="blog-item-title">Fotoğraf Galeri</div>
+                                </div>
+                                <p class="blog-item-description">Projelerimizden görsel içerikler.</p>
+                            </a>
+                        </div>
+                        <div class="blog-section">
+                            <h3 class="blog-section-title text-black">Müşteri Deneyimleri</h3>
+                            <a href="/blog/musteri-yorumlari" class="blog-item">
+                                <div class="blog-item-header">
+                                    <i class="fas fa-comments menu-icon"></i>
+                                    <div class="blog-item-title">Müşteri Yorumları</div>
+                                </div>
+                                <p class="blog-item-description">Mutlu müşterilerimizin deneyimleri ve görüşleri.</p>
+                            </a>
+                            <a href="/blog/basari-hikayeleri" class="blog-item">
+                                <div class="blog-item-header">
+                                    <i class="fas fa-star menu-icon"></i>
+                                    <div class="blog-item-title">Başarı Hikayeleri</div>
+                                </div>
+                                <p class="blog-item-description">Projelerimizin başarı hikayeleri.</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="/iletisim" class="nav-link text-base text-gray-700 hover:text-[#c4a47c] transition-colors duration-300">
+                    İletişim
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button type="button" class="lg:hidden p-2 rounded-md text-gray-700 hover:text-[#c4a47c] focus:outline-none" id="mobile-menu-button">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed inset-0 bg-white/98 backdrop-blur-lg z-[100] hidden lg:hidden overflow-y-auto" id="mobile-menu">
+        <div class="container mx-auto px-4 py-6">
+            <!-- Üst Bar -->
+            <div class="flex justify-between items-center mb-8 border-b border-gray-100 pb-4">
+                <img src="/assets/images/logopng.png" alt="Nexus Life" class="h-8 w-auto">
+                <button type="button" class="p-2 text-gray-700 hover:text-[#c4a47c] focus:outline-none transition-colors" id="mobile-menu-close">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobil Navigasyon -->
+            <nav class="space-y-4">
+                <a href="/" class="mobile-nav-item block text-lg text-gray-700 hover:text-[#c4a47c] transition-colors duration-300 py-3 border-b border-gray-50">
+                    Ana Sayfa
+                </a>
+
+                <!-- Kurumsal Accordion -->
+                <div class="mobile-accordion border-b border-gray-50">
+                    <button class="flex justify-between items-center w-full text-lg text-gray-700 hover:text-[#c4a47c] py-3">
+                        <span>Kurumsal</span>
+                        <svg class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="mobile-accordion-content hidden pl-4 pb-3">
+                        <a href="/kurumsal/hakkimizda" class="block py-2 text-gray-600 hover:text-[#c4a47c]">Hakkımızda</a>
+                        <a href="/kurumsal/vizyon-misyon" class="block py-2 text-gray-600 hover:text-[#c4a47c]">Vizyon & Misyon</a>
+                        <a href="/kurumsal/insan-kaynaklari" class="block py-2 text-gray-600 hover:text-[#c4a47c]">İnsan Kaynakları</a>
+                        <a href="/kurumsal/kalite-politikamiz" class="block py-2 text-gray-600 hover:text-[#c4a47c]">Kalite Politikamız</a>
+                    </div>
+                </div>
+
+                <!-- Ürünler Accordion -->
+                <div class="mobile-accordion border-b border-gray-50">
+                    <button class="flex justify-between items-center w-full text-lg text-gray-700 hover:text-[#c4a47c] py-3">
+                        <span>Ürünlerimiz</span>
+                        <svg class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="mobile-accordion-content hidden pl-4 pb-3">
+                        <a href="/urunler/tiny-house" class="block py-2 text-gray-600 hover:text-[#c4a47c]">
+                            <div class="flex items-center">
+                                <i class="fas fa-home mr-2 text-[#c4a47c]"></i>
+                                <span>Tiny House</span>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-1 ml-6">Minimalist yaşam için tasarlanmış kompakt evler.</p>
                         </a>
-                        <a href="/kurumsal/vizyon-misyon" class="dropdown-item">
-                            <i class="fas fa-bullseye"></i> Vizyonumuz & Misyonumuz
+                        <a href="/urunler/bungalow" class="block py-2 text-gray-600 hover:text-[#c4a47c]">
+                            <div class="flex items-center">
+                                <i class="fas fa-warehouse mr-2 text-[#c4a47c]"></i>
+                                <span>Bungalow</span>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-1 ml-6">Doğayla iç içe yaşam için modern bungalov evler.</p>
                         </a>
-                        <a href="/kurumsal/insan-kaynaklari" class="dropdown-item">
-                            <i class="fas fa-users"></i> İnsan Kaynakları
-                        </a>
-                        <a href="/kurumsal/is-sagligi-guvenligi" class="dropdown-item">
-                            <i class="fas fa-hard-hat"></i> İş Sağlığı, Güvenliği ve Çevre Politikamız
-                        </a>
-                        <a href="/kurumsal/musteri-memnuniyeti" class="dropdown-item">
-                            <i class="fas fa-heart"></i> Müşteri Memnuniyeti
-                        </a>
-                        <a href="/kurumsal/kalite-politikamiz" class="dropdown-item">
-                            <i class="fas fa-award"></i> Kalite Politikamız
+                        <a href="/urunler/capsule-house" class="block py-2 text-gray-600 hover:text-[#c4a47c]">
+                            <div class="flex items-center">
+                                <i class="fas fa-cube mr-2 text-[#c4a47c]"></i>
+                                <span>Capsule House</span>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-1 ml-6">Geleceğin yaşam alanları: Kapsül evler.</p>
                         </a>
                     </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <button class="nav-link dropdown-toggle">
-                        Ürünlerimiz <i class="fas fa-chevron-down"></i>
+                </div>
+
+                <a href="/galeri" class="mobile-nav-item block text-lg text-gray-700 hover:text-[#c4a47c] transition-colors duration-300 py-3 border-b border-gray-50">
+                    Galeri
+                </a>
+
+                <!-- Blog Accordion -->
+                <div class="mobile-accordion border-b border-gray-50">
+                    <button class="flex justify-between items-center w-full text-lg text-gray-700 hover:text-[#c4a47c] py-3">
+                        <span>Blog</span>
+                        <svg class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+                        </svg>
                     </button>
-                    <div class="dropdown-menu">
-                        <a href="/urunler/tiny-house" class="dropdown-item">
-                            <i class="fas fa-home"></i> Tiny House
-                        </a>
-                        <a href="/urunler/bungalow" class="dropdown-item">
-                            <i class="fas fa-campground"></i> Bungalow
-                        </a>
-                        <a href="/urunler/capsule-house" class="dropdown-item">
-                            <i class="fas fa-cube"></i> Capsule House
-                        </a>
+                    <div class="mobile-accordion-content hidden pl-4 pb-3">
+                        <div class="mb-4">
+                            <h4 class="text-sm font-semibold text-[#c4a47c] uppercase tracking-wider mb-2">Haberler</h4>
+                            <a href="/blog/haberler" class="block py-2 text-gray-600 hover:text-[#c4a47c]">
+                                <div class="flex items-center">
+                                    <i class="fas fa-newspaper mr-2 text-[#c4a47c]"></i>
+                                    <span>Son Haberler</span>
+                                </div>
+                            </a>
+                            <a href="/blog/basin" class="block py-2 text-gray-600 hover:text-[#c4a47c]">
+                                <div class="flex items-center">
+                                    <i class="fas fa-tv mr-2 text-[#c4a47c]"></i>
+                                    <span>Basında Biz</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-sm font-semibold text-[#c4a47c] uppercase tracking-wider mb-2">Multimedya</h4>
+                            <a href="/blog/videolar" class="block py-2 text-gray-600 hover:text-[#c4a47c]">
+                                <div class="flex items-center">
+                                    <i class="fas fa-video mr-2 text-[#c4a47c]"></i>
+                                    <span>Video Galeri</span>
+                                </div>
+                            </a>
+                            <a href="/blog/fotograflar" class="block py-2 text-gray-600 hover:text-[#c4a47c]">
+                                <div class="flex items-center">
+                                    <i class="fas fa-camera mr-2 text-[#c4a47c]"></i>
+                                    <span>Fotoğraf Galeri</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-[#c4a47c] uppercase tracking-wider mb-2">Müşteri Deneyimleri</h4>
+                            <a href="/blog/musteri-yorumlari" class="block py-2 text-gray-600 hover:text-[#c4a47c]">
+                                <div class="flex items-center">
+                                    <i class="fas fa-comments mr-2 text-[#c4a47c]"></i>
+                                    <span>Müşteri Yorumları</span>
+                                </div>
+                            </a>
+                            <a href="/blog/basari-hikayeleri" class="block py-2 text-gray-600 hover:text-[#c4a47c]">
+                                <div class="flex items-center">
+                                    <i class="fas fa-star mr-2 text-[#c4a47c]"></i>
+                                    <span>Başarı Hikayeleri</span>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                </li>
-                <li class="nav-item">
-                    <a href="/galeri" class="nav-link">Galeri</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/iletisim" class="nav-link">İletişim</a>
-                </li>
-            </ul>
-        </nav>
-        <button class="mobile-menu-btn">
-            <span class="line"></span>
-            <span class="line"></span>
-        </button>
+                </div>
+
+                <a href="/iletisim" class="mobile-nav-item block text-lg text-gray-700 hover:text-[#c4a47c] transition-colors duration-300 py-3 border-b border-gray-50">
+                    İletişim
+                </a>
+            </nav>
+
+            <!-- Sosyal Medya Linkleri -->
+            <div class="mt-8 flex justify-center space-x-6">
+                <a href="#" class="text-gray-500 hover:text-[#c4a47c] transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-[#c4a47c] transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
     </div>
 </header>
-<script defer src="/assets/js/header.js"></script> 
+
+<!-- Header offset div -->
+<div class="header-offset"></div>
+
+<script>
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('.header');
+        if (window.scrollY > 50) {
+            header.classList.add('shadow-md');
+        } else {
+            header.classList.remove('shadow-md');
+        }
+    });
+
+    // Mobile menu functionality
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const accordions = document.querySelectorAll('.mobile-accordion button');
+
+    function toggleMobileMenu() {
+        mobileMenu.classList.toggle('hidden');
+        document.body.classList.toggle('overflow-hidden');
+    }
+
+    mobileMenuButton.addEventListener('click', toggleMobileMenu);
+    mobileMenuClose.addEventListener('click', toggleMobileMenu);
+
+    // Accordion functionality
+    accordions.forEach(accordion => {
+        accordion.addEventListener('click', function() {
+            const content = this.nextElementSibling;
+            const arrow = this.querySelector('svg');
+            
+            // Diğer tüm accordion içeriklerini kapat
+            accordions.forEach(otherAccordion => {
+                if (otherAccordion !== this) {
+                    const otherContent = otherAccordion.nextElementSibling;
+                    const otherArrow = otherAccordion.querySelector('svg');
+                    otherContent.classList.add('hidden');
+                    otherArrow.classList.remove('rotate-180');
+                }
+            });
+
+            // Tıklanan accordion'u aç/kapat
+            content.classList.toggle('hidden');
+            arrow.classList.toggle('rotate-180');
+        });
+    });
+
+    // Sayfa yüklendiğinde aktif menü öğesini işaretle
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentPath = window.location.pathname;
+        const menuItems = document.querySelectorAll('.nav-link, .mobile-nav-item');
+        
+        menuItems.forEach(item => {
+            if (item.getAttribute('href') === currentPath) {
+                item.classList.add('text-[#c4a47c]');
+            }
+        });
+    });
+</script>
