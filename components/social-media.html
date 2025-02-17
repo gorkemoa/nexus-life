@@ -226,6 +226,7 @@
     padding: 3px;
     cursor: pointer;
     transition: transform 0.3s ease;
+    opacity: 0.9;
 }
 
 .story-ring:hover {
@@ -412,6 +413,7 @@
     border-radius: 15px;
     overflow: hidden;
     background-color: #000;
+    cursor: pointer;
 }
 
 .modal-body {
@@ -439,7 +441,6 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Story modalları için otomatik ilerleme ve kapatma
     const storyModals = document.querySelectorAll('.modal');
     let storyTimeout;
     let progressTimeout;
@@ -456,10 +457,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 progressBar.style.width = '100%';
             }, 100);
 
-            // 5 saniye sonra modalı kapat
+            // 7 saniye sonra modalı kapat (süreyi artırdık)
             storyTimeout = setTimeout(() => {
                 modalInstance.hide();
-            }, 5000);
+            }, 7000);
         });
 
         // Modal kapatıldığında timeout'ları temizle
@@ -470,15 +471,27 @@ document.addEventListener('DOMContentLoaded', function() {
             progressBar.style.width = '0';
         });
 
-        // Kapatma butonuna tıklandığında
-        const closeBtn = modal.querySelector('.btn-close');
-        if (closeBtn) {
-            closeBtn.addEventListener('click', function() {
+        // Herhangi bir yere tıklandığında modalı kapat
+        modal.addEventListener('click', function(event) {
+            if (event.target.classList.contains('modal-content') || 
+                event.target.classList.contains('story-modal-content') ||
+                event.target.tagName === 'IMG') {
                 clearTimeout(storyTimeout);
                 clearTimeout(progressTimeout);
                 modalInstance.hide();
+            }
+        });
+
+        // Story halkalarına hover efekti ekle
+        const storyRings = document.querySelectorAll('.story-ring');
+        storyRings.forEach(ring => {
+            ring.addEventListener('mouseenter', function() {
+                this.style.opacity = '1';
             });
-        }
+            ring.addEventListener('mouseleave', function() {
+                this.style.opacity = '0.9';
+            });
+        });
     });
 });
 </script> 
