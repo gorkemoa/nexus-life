@@ -120,12 +120,12 @@
     max-width: 600px;
     padding: 3.5rem;
     background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 24px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    animation: fadeInLeft 1s ease-out;
+    opacity: 1;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes fadeInLeft {
@@ -142,6 +142,7 @@
 .hero-badge {
     margin-bottom: 2rem;
     display: inline-block;
+    opacity: 1;
 }
 
 .hero-badge span {
@@ -168,6 +169,7 @@
     color: var(--accent-gold);
     margin-bottom: 1.5rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    opacity: 1;
 }
 
 .hero-text p {
@@ -177,7 +179,7 @@
     margin-bottom: 2rem;
     font-weight: 300;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    opacity: 0.9;
+    opacity: 1;
 }
 
 .hero-features {
@@ -218,7 +220,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
@@ -506,6 +508,7 @@
         padding: 2rem;
         margin: 0 1rem;
         max-width: 90%;
+        opacity: 1;
     }
 
     .hero-features {
@@ -625,7 +628,7 @@
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.3);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dot.active {
@@ -648,7 +651,7 @@
     justify-content: center;
     color: white;
     z-index: 15;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .prev-btn {
@@ -674,6 +677,7 @@
     width: 100%;
     height: 100vh;
     overflow: hidden;
+    background: var(--primary-dark);
 }
 
 .slide {
@@ -683,20 +687,41 @@
     width: 100%;
     height: 100%;
     opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+    transform: scale(1.05);
+    filter: blur(10px);
+    transition: opacity 1s ease-in-out, 
+                transform 1s ease-in-out,
+                filter 1s ease-in-out;
+    will-change: opacity, transform, filter;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .slide.active {
     opacity: 1;
-    visibility: visible;
+    transform: scale(1);
+    filter: blur(0);
+    z-index: 2;
+}
+
+.slide.previous {
+    opacity: 1;
+    transform: scale(1.1);
+    filter: blur(10px);
+    z-index: 1;
 }
 
 .slide img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(0.7);
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .prev,
@@ -769,7 +794,9 @@
     height: 100%;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                visibility 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, visibility;
 }
 
 .slide.active {

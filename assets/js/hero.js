@@ -1,71 +1,96 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Slider elemanları
+    // Temel değişkenler
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
     const prevBtn = document.querySelector('.prev-btn');
     const nextBtn = document.querySelector('.next-btn');
     let currentSlide = 0;
     let slideInterval;
+    const SLIDE_INTERVAL_TIME = 5000;
+    let isTransitioning = false;
 
-    // Slider fonksiyonları
+    // Slayt gösterme fonksiyonu
     function showSlide(index) {
-        // Aktif slaytı kaldır
-        document.querySelector('.slide.active').classList.remove('active');
-        document.querySelector('.dot.active').classList.remove('active');
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        const activeSlide = document.querySelector('.slide.active');
+        const activeDot = document.querySelector('.dot.active');
         
-        // Yeni slayt indeksini ayarla
-        if (index >= slides.length) index = 0;
-        if (index < 0) index = slides.length - 1;
+        activeSlide.classList.remove('active');
+        activeDot.classList.remove('active');
         
-        // Yeni slaytı aktif yap
-        slides[index].classList.add('active');
-        dots[index].classList.add('active');
-        currentSlide = index;
+        currentSlide = index >= slides.length ? 0 : index < 0 ? slides.length - 1 : index;
+        
+        // Bir sonraki slaytı hazırla
+        const nextSlide = slides[currentSlide];
+        const nextDot = dots[currentSlide];
+
+        // Görüntü önbelleğe alma
+        const img = nextSlide.querySelector('img');
+        if (img && !img.complete) {
+            img.loading = 'eager';
+        }
+
+        // Geçiş efekti
+        requestAnimationFrame(() => {
+            nextSlide.classList.add('active');
+            nextDot.classList.add('active');
+            
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 600); // CSS transition süresiyle eşleşmeli
+        });
     }
 
-    // Otomatik geçiş
+    // Otomatik geçiş yönetimi
     function startAutoSlide() {
         if (slideInterval) clearInterval(slideInterval);
         slideInterval = setInterval(() => {
-            showSlide(currentSlide + 1);
-        }, 5000);
+            if (!isTransitioning) {
+                showSlide(currentSlide + 1);
+            }
+        }, SLIDE_INTERVAL_TIME);
     }
 
-    // Event Listeners
-    prevBtn.addEventListener('click', () => {
-        showSlide(currentSlide - 1);
-        startAutoSlide();
+    // Olay dinleyicileri
+    prevBtn?.addEventListener('click', () => {
+        if (!isTransitioning) {
+            showSlide(currentSlide - 1);
+            startAutoSlide();
+        }
     });
 
-    nextBtn.addEventListener('click', () => {
-        showSlide(currentSlide + 1);
-        startAutoSlide();
+    nextBtn?.addEventListener('click', () => {
+        if (!isTransitioning) {
+            showSlide(currentSlide + 1);
+            startAutoSlide();
+        }
     });
 
     dots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
-            showSlide(index);
-            startAutoSlide();
+            if (!isTransitioning && currentSlide !== index) {
+                showSlide(index);
+                startAutoSlide();
+            }
         });
     });
 
-    // Mouse hover olayları
+    // Slider hover kontrolü
     const slider = document.querySelector('.slider');
-    slider.addEventListener('mouseenter', () => clearInterval(slideInterval));
-    slider.addEventListener('mouseleave', startAutoSlide);
+    slider?.addEventListener('mouseenter', () => clearInterval(slideInterval));
+    slider?.addEventListener('mouseleave', startAutoSlide);
 
-    // Başlangıçta otomatik geçişi başlat
-    startAutoSlide();
-
-    // Hero içeriği animasyonu
+    // Hero içeriği için basit fade-in animasyonu
     const heroContent = document.querySelector('.hero-content');
-    heroContent.style.opacity = '0';
-    heroContent.style.transform = 'translateY(20px)';
-    
-    setTimeout(() => {
+    if (heroContent) {
         heroContent.style.opacity = '1';
         heroContent.style.transform = 'translateY(0)';
-    }, 100);
+    }
+
+    // Başlangıç
+    startAutoSlide();
 
     // Paralaks scroll efekti
     window.addEventListener('scroll', () => {
@@ -205,4 +230,13 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     createGlowEffect();
+
+    // Görüntüleri önceden yükle
+    slides.forEach(slide => {
+        const img = slide.querySelector('img');
+        if (img) {
+            const imageLoader = new Image();
+            imageLoader.src = img.src;
+        }
+    });
 }); 
