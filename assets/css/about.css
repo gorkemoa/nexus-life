@@ -2,13 +2,22 @@
     --gold: #d4af37;
     --gold-light: #f4e5c2;
     --gold-hover: #e5c158;
+    --gold-shadow: rgba(212, 175, 55, 0.3);
+    --dark: #1a1a1a;
+    --dark-gray: #2c2c2a;
+    --white: #ffffff;
+    --light-beige: #f6ecd8;
+    --light-gray: #d1d1cf;
+    --medium-gray: #454543;
+    --orange-light: #ffa500;
+    --box-bg-start: rgba(26, 26, 26, 0.95);
+    --box-bg-end: rgba(44, 44, 42, 0.98);
+    --box-border: rgba(255, 165, 0, 0.3);
+    --box-shadow: rgba(255, 165, 0, 0.15);
     --green-primary: #2A9D8F;
     --green-light: #8ECEC4;
     --green-dark: #264653;
     --orange-primary: #E76F51;
-    --orange-light: #F4A261;
-    --orange-dark: #E9C46A;
-    --white: #ffffff;
     --overlay: rgba(38, 70, 83, 0.8);
     --gray-50: #f8fafc;
     --gray-100: #f1f5f9;
@@ -16,7 +25,6 @@
     --gray-300: #cbd5e1;
     --gray-400: #94a3b8;
     --gray-500: #64748b;
-    --light-beige: #f6ecd8;
 }
 
 .text-theme {
@@ -301,7 +309,8 @@
 /* Temel Stiller */
 .about-section {
     position: relative;
-    background: none;
+    isolation: isolate;
+    will-change: transform;
 }
 
 .about-section::before {
@@ -349,7 +358,7 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
-    opacity: 0.1;
+    opacity: 0.05;
     mix-blend-mode: screen;
 }
 
@@ -395,27 +404,20 @@
 .stat-content, .feature-content {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(165deg,
-        rgba(40, 44, 52, 0.95) 0%,
-        rgba(75, 85, 99, 0.95) 100%
-    );
+    background: linear-gradient(165deg, var(--box-bg-start), var(--box-bg-end));
+    box-shadow: 0 8px 32px var(--box-shadow);
+    border: 1px solid var(--box-border);
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
     backdrop-filter: blur(10px);
-    border: 2px solid rgba(212, 175, 55, 0.6);
-    box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.15),
-        0 2px 8px rgba(212, 175, 55, 0.1);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .stat-content:hover, .feature-content:hover {
-    background: linear-gradient(165deg,
-        rgba(75, 85, 99, 0.95) 0%,
-        rgba(40, 44, 52, 0.95) 100%
-    );
-    border-color: rgba(212, 175, 55, 0.8);
-    box-shadow: 
-        0 12px 40px rgba(0, 0, 0, 0.2),
-        0 4px 12px rgba(212, 175, 55, 0.2);
+    background: linear-gradient(165deg, var(--box-bg-end), var(--box-bg-start));
+    border-color: var(--box-border);
+    box-shadow: 0 12px 40px var(--box-shadow);
     transform: translateY(-5px);
 }
 
@@ -480,8 +482,7 @@
     inset: 0;
     background: linear-gradient(45deg, var(--gold) 0%, transparent 70%);
     opacity: 0.1;
-    z-index: 1;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.3s ease;
 }
 
 .image-frame:hover::before {
@@ -490,20 +491,12 @@
 
 /* Animasyonlar */
 @keyframes shimmer {
-    to {
-        background-position: 200% center;
-    }
+    to { background-position: 200% center; }
 }
 
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 /* Responsive */
@@ -587,9 +580,12 @@ p {
 }
 
 /* İkon renkleri */
-.icon-container i {
+.icon-container i,
+.icon-wrapper i {
     color: var(--gold);
-    font-size: 1.8rem;
+    text-shadow: 0 0 15px var(--gold-shadow);
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 /* Geçiş efektleri */
@@ -622,7 +618,65 @@ p {
 /* Counter stilleri */
 .counter {
     color: var(--gold);
-    text-shadow: none;
+    font-weight: 700;
+}
+
+.counter-wrapper span {
+    color: var(--gold-light);
+}
+
+h3 {
+    color: var(--white) !important;
+    font-weight: 600;
+}
+
+/* Optimize edilmiş geçişler */
+.transition-all {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hardware acceleration için transform */
+.luxury-stat-card,
+.luxury-feature,
+.image-frame {
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+/* Performans için gereksiz efektleri kaldır */
+#particles-js {
+    opacity: 0.05;
+}
+
+.luxury-shape {
+    display: none;
+}
+
+/* Optimize edilmiş görsel efektleri */
+.image-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, var(--gold) 0%, transparent 70%);
+    opacity: 0.1;
+    transition: opacity 0.3s ease;
+}
+
+/* Temel metin stilleri */
+p {
+    color: var(--white);
+    opacity: 0.9;
+}
+
+/* İkon stilleri */
+.icon-container i {
+    color: var(--gold);
+    font-size: 1.8rem;
+}
+
+/* Counter stilleri */
+.counter {
+    color: var(--gold);
     font-weight: 700;
 }
 

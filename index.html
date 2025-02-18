@@ -371,7 +371,6 @@
                 let currentSlide = 0;
                 let slideInterval;
                 let isSliderPaused = false;
-                let isAnimating = false;
 
                 const goToSlide = (index, direction = 'next') => {
                     if (isAnimating) return;
@@ -582,6 +581,52 @@
 
                 // Üretim sürecini başlat
                 initializeProductionProcess();
+
+                const navButtons = document.querySelectorAll('.process-nav-btn');
+                const steps = document.querySelectorAll('.process-step');
+                let currentStep = 1;
+                let isAnimating = false;
+
+                function switchStep(newStep) {
+                    if (isAnimating || currentStep === newStep) return;
+                    isAnimating = true;
+
+                    navButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        if (parseInt(btn.dataset.step) === newStep) {
+                            btn.classList.add('active');
+                        }
+                    });
+
+                    const currentStepEl = document.getElementById(`step-${currentStep}`);
+                    currentStepEl.style.opacity = '0';
+                    currentStepEl.style.transform = 'translateY(20px)';
+
+                    setTimeout(() => {
+                        currentStepEl.style.display = 'none';
+                        currentStepEl.classList.remove('active');
+
+                        const newStepEl = document.getElementById(`step-${newStep}`);
+                        newStepEl.style.display = 'block';
+                        newStepEl.offsetHeight;
+                        newStepEl.classList.add('active');
+                        newStepEl.style.opacity = '1';
+                        newStepEl.style.transform = 'translateY(0)';
+
+                        currentStep = newStep;
+                        
+                        setTimeout(() => {
+                            isAnimating = false;
+                        }, 500);
+                    }, 500);
+                }
+
+                navButtons.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const newStep = parseInt(this.dataset.step);
+                        switchStep(newStep);
+                    });
+                });
 
             } catch (error) {
                 console.error('Bileşenler yüklenirken hata:', error);

@@ -60,7 +60,8 @@
     align-items: center;
     gap: 10px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, background-color, box-shadow;
 }
 
 .process-nav-btn i {
@@ -85,10 +86,16 @@
 /* Adım İçerikleri */
 .process-step {
     display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    will-change: opacity, transform;
 }
 
 .process-step.active {
     display: block;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .step-info {
@@ -122,8 +129,9 @@
     padding: 15px;
     background: white;
     border-radius: 12px;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid #eee;
+    will-change: transform, background-color;
 }
 
 .features-list .feature-item:hover {
@@ -164,7 +172,8 @@
     width: 100%;
     height: 400px;
     object-fit: cover;
-    transition: all 0.5s ease;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
 }
 
 .step-image:hover img {
@@ -194,8 +203,9 @@
     background: white;
     border-radius: 15px;
     min-width: 200px;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid #eee;
+    will-change: transform, background-color, box-shadow;
 }
 
 .badge-item:hover {

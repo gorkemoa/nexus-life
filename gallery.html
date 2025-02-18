@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri - Nexus Life</title>
+    
+    <!-- Preload kritik kaynaklar -->
+    <link rel="preload" href="assets/css/gallery.css" as="style">
+    <link rel="preload" href="assets/js/gallery.js" as="script">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/gallery.css">
+</head>
+<body>
+    <section class="gallery-section">
+        <div class="gallery-container">
+            <h1 class="gallery-title">Galeri</h1>
+            <p class="gallery-subtitle">Lüks yaşam alanlarımızdan özel kareler</p>
+            
+            <div class="gallery-grid">
+                <!-- Her resim için loading="lazy" ve decoding="async" eklendi -->
+                <div class="gallery-item" data-aos="fade-up">
+                    <div class="img-container">
+                        <img src="assets/images/gallery/1.jpg" alt="Lüks Villa Dış Görünüm" loading="lazy" decoding="async">
+                        <div class="item-overlay">
+                            <h3 class="item-title">Lüks Villa</h3>
+                            <p class="item-description">Modern mimari ve lüks yaşamın buluşma noktası</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="img-container">
+                        <img src="assets/images/gallery/2.jpg" alt="Modern Salon" loading="lazy" decoding="async">
+                        <div class="item-overlay">
+                            <h3 class="item-title">Modern Salon</h3>
+                            <p class="item-description">Ferah ve şık iç mekan tasarımı</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="img-container">
+                        <img src="assets/images/gallery/3.jpg" alt="Havuz Başı" loading="lazy" decoding="async">
+                        <div class="item-overlay">
+                            <h3 class="item-title">Havuz Başı</h3>
+                            <p class="item-description">Özel tasarım yüzme havuzu</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="img-container">
+                        <img src="assets/images/gallery/4.jpg" alt="Mutfak" loading="lazy" decoding="async">
+                        <div class="item-overlay">
+                            <h3 class="item-title">Modern Mutfak</h3>
+                            <p class="item-description">Tam donanımlı lüks mutfak</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up">
+                    <div class="img-container">
+                        <img src="assets/images/gallery/5.jpg" alt="Yatak Odası" loading="lazy" decoding="async">
+                        <div class="item-overlay">
+                            <h3 class="item-title">Ana Yatak Odası</h3>
+                            <p class="item-description">Konforlu ve şık yatak odası</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="img-container">
+                        <img src="assets/images/gallery/6.jpg" alt="Banyo" loading="lazy" decoding="async">
+                        <div class="item-overlay">
+                            <h3 class="item-title">Lüks Banyo</h3>
+                            <p class="item-description">Modern ve ferah banyo tasarımı</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="img-container">
+                        <img src="assets/images/gallery/7.jpg" alt="Teras" loading="lazy" decoding="async">
+                        <div class="item-overlay">
+                            <h3 class="item-title">Özel Teras</h3>
+                            <p class="item-description">Muhteşem manzaralı teras</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="img-container">
+                        <img src="assets/images/gallery/8.jpg" alt="Bahçe" loading="lazy" decoding="async">
+                        <div class="item-overlay">
+                            <h3 class="item-title">Peyzaj</h3>
+                            <p class="item-description">Özenle tasarlanmış bahçe</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Lightbox -->
+        <div class="lightbox">
+            <div class="lightbox-content">
+                <div class="lightbox-image-container">
+                    <img id="lightbox-img" src="" alt="Büyük Görüntü">
+                </div>
+            </div>
+            <div class="close-btn">&times;</div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script src="assets/js/gallery.js" defer></script>
+</body>
+</html> 
